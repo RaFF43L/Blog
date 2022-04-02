@@ -5,34 +5,34 @@
      <h2>Artigos</h2>
      <a class="btn btn-success" href="/admin/articles/new">Criar novo Artigo </a>
      <hr>
-     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Slug</th>
-                <th>Categoria</th>
-                <th>Ações</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <% articles.forEach(item => { %>  
-            <tr>
-                <th><%= item.id %></th>
-                <th><%= item.title %></th>
-                <th><%= item.slug %></th>
-                <th><%= item.category.title%></th>
-                <th>
-                <a class="btn btn-warning" href="/admin/articles/edit/<%=item.id%>">Editar</a>
-                    <form method="post" action="/articles/delete" style="display: inline;" onsubmit="Deletar(event, this)">
-                        <input type="hidden" name="id" value="<%= item.id %>">
-                        <button class="btn btn-danger">Deletar</button>
-                    </form></th>
-            </tr>
-        <% }); %>
-        </tbody>
-     </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>           
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(item => { %>  
+                <tr>
+                    <th><%= item.id %></th>
+                    <th><%= item.title %></th>
+                    <th><%= item.slug %></th>
+                    <th><%= item.category.title %></th>
+                    <th style="display:flex; flex-direction: row;">
+                    <a class="btn btn-warning" href="/admin/articles/edit/<%=item.id%>" style="margin-right:5%;">Editar</a>
+                        <form method="post" action="/articles/delete" style="display: inline;" onsubmit="Deletar(event, this)">
+                            <input type="hidden" name="id" value="<%= item.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
    </div>
 <%- include('../../partials/footer.ejs') %>
 <script>

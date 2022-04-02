@@ -8,10 +8,10 @@
      <table class="table table-bordered">
         <thead>
             <tr>
-                <th>id</th>
-                <th>titulo</th>
-                <th>slug</th>
-                <th>ações</th>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Slug</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +20,8 @@
                 <th><%= item.id %></th>
                 <th><%= item.title %></th>
                 <th><%= item.slug %></th>
-                <th>
-                    <a class="btn btn-warning" href="/admin/categories/edit/<%=item.id%>">Editar</a>
+                <th style="display:flex; flex-direction: row;">
+                    <a class="btn btn-warning" href="/admin/categories/edit/<%=item.id%>" style="margin-right:5%;">Editar</a>
                     <form method="post" action="/categories/delete" style="display: inline;" onsubmit="Deletar(event, this)">
                         <input type="hidden" name="id" value="<%= item.id %>">
                         <button class="btn btn-danger">Deletar</button>
