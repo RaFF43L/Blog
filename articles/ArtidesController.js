@@ -69,6 +69,8 @@ router.get("/admin/articles/edit/:id", (req, res) =>{
             res.redirect("/admin/articles");
         }
 
+    }).catch(error=>{
+        res.redirect("/");
     });
 })
 router.post("/articles/edit", (req, res)=>{
