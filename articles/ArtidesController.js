@@ -3,6 +3,7 @@ const router = express.Router();
 const Category = require("../categories/Category");
 const Articles =  require("./Article");
 const slugify = require("slugify");
+const Article = require("./Article");
 
 router.get("/admin/articles", (req, res) =>{
     Articles.findAll({
@@ -97,5 +98,40 @@ router.post("/articles/edit", (req, res)=>{
         res.redirect("/admin/articles");
     }
    
+});
+
+router.get("/articles/page/:num", (req, res) => {
+    var page = req.params.num;
+    var offset = 0;
+    if(isNaN(page) || page == 1){
+        offset = 0;
+    }else{
+        offset =(Number(page)-1) * 4
+    }
+        Article.findAndCountAll({
+            order:[
+                ['id','DESC']
+            ] ,
+            limit: 4,
+            offset: offset
+        }).then(articles =>{
+            var next;
+            if(offset + 4 >= articles.count){
+                next = false;
+            }else{
+                next = true;
+            }
+            var result = {
+                page: Number(page),
+                next: next,
+                articles: articles
+            }
+            Category.findAll().then(categories =>{
+                res.render("admin/articles/page",{
+                    categories: categories,
+                    result: result
+                })
+            })
+        });
 });
 module.exports = router;
