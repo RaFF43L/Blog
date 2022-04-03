@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const session = require("express-session");
 const connection = require("./database/database");
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArtidesController");
@@ -20,15 +21,22 @@ authenticate()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
+//SESSION
+app.use(session({
+    secret: "uahsduasdiasdkaisdk",
+    cookie: {maxAge: 30000}
+}))
 
 app.use("/", categoriesController);
 app.use("/", articlesController);
 app.use("/",userController);
 
-
+// View Engine
 app.set('view engine', 'ejs');
+
+
+//STATIC
 app.use(express.static('public'));
-//body parser
 
 
 app.get("/",(req, res) => {
