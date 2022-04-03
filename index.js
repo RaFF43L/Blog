@@ -3,10 +3,10 @@ const app = express();
 const connection = require("./database/database");
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArtidesController");
-
+const userController = require("./user/UserController");
 const Category = require("./categories/Category");
 const Article = require("./articles/Article");
-
+const User = require("./user/User");
 
 // DATABASE
 connection.
@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true}));
 
 app.use("/", categoriesController);
 app.use("/", articlesController);
+app.use("/",userController);
 
 
 app.set('view engine', 'ejs');
